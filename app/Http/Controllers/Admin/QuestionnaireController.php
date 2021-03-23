@@ -141,3 +141,14 @@ class QuestionnaireController extends Controller
         //
     }
 }
+    // $data = $request->validate($array_validation);
+
+    // if($request->has("رقم_الجوال")):
+    // $name = $request['رقم_الجوال'];
+    // $like = '%'.$name.'%';
+    // $q = DB::select("SELECT * FROM question_answers WHERE value LIKE ?" , [$like]);
+    // if(count($q) > 0){
+    // session()->flash('mobile_unique_error' , 'رقم الجوال مستعمل من قبل');
+    // return redirect()->back();
+    // }
+    // endif;
