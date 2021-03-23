@@ -32,7 +32,6 @@ class SectionExcel implements FromView
         foreach($section->questions as $value):
             array_push($keys , $value->title);
         endforeach;
-        
         return view('exports.answers', [
             'keys'  =>  $keys,
             'section' => $this->section

@@ -11,6 +11,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>11</title>
+    <style>
+        [data-aos^=fade][data-aos^=fade]{
+            opacity: 1 !important;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -56,11 +61,15 @@ $msgClass = 'alert-info';
     </div>
 @endif
 
-{{--{{ dd($section->questions) }}--}}
 <!-- =======================================
             INVOICE
 ============================================= -->
 <div class="container-fluid">
+    @if(session()->has('mobile_unique_error'))
+    <div class="alert alert-danger  alert-dismissible show">
+        <p>{{ session('mobile_unique_error') }}</p>
+    </div>
+    @endif
     <div class="row justify-content-center p-0 m-0">
         <div class="col-10 col-md-6 " style="border-radius: 25px; box-shadow: 1px 2px 20px 10px #E4E4E4;">
 

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Section;
 use App\QuestionAnswer;
 
+use Illuminate\Support\Facades\DB;
+
+
 class QuestionnaireController extends Controller
 {
     /**
@@ -31,7 +34,8 @@ class QuestionnaireController extends Controller
      }
    public function formStore(\Illuminate\Http\Request $request ,Section $section)
    {
-        $array_validation = [];
+         $array_validation = [];
+
         $image_feild = '';
         foreach ($section->questions as $question){
         $array_validation = array_merge($array_validation ,[str_replace(' ' , '_' , $question->title) =>
@@ -53,6 +57,17 @@ class QuestionnaireController extends Controller
         * هنا عملية التحقق من القيم و تخزين الصورة
         */
         $data = $request->validate($array_validation);
+
+        if($request->has("رقم_الجوال")):
+            $name = $request['رقم_الجوال'];
+            $like = '%'.$name.'%';
+            $q = DB::select("SELECT * FROM question_answers WHERE value LIKE ?" , [$like]);
+            if(count($q) > 0){
+                session()->flash('mobile_unique_error' , 'رقم الجوال مستعمل من قبل');
+                return redirect()->back();
+            }
+        endif;
+
         $data_json = [] ;
         foreach ($section->questions as $question ){
         $data_json = array_merge($data_json , [$question->title => $data[str_replace(' ' , '_' , $question->feialdType->type

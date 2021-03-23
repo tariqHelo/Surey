@@ -39,7 +39,7 @@
                             @php $answers = json_decode($answer->value); @endphp
                             @foreach($keys as $key)
                                 <td class="border px-12 py-2">
-                                    {{ $answers->{$key} }}
+                                    {{ isset($answers->{$key}) ? $answers->{$key} : '' }}
                                 </td>
                             @endforeach
                                 <td class="border px-12 py-2">
